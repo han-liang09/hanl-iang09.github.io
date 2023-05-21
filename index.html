@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>对怡宝的爱</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        h1 {
+            color: red;
+        }
+
+        #message {
+            margin-top: 50px;
+            font-size: 20px;
+        }
+
+        #love-letter {
+            display: none;
+            margin-top: 50px;
+            font-size: 18px;
+            width: 400px;
+            height: 200px;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+
+        #love-letter.show {
+            opacity: 1;
+        }
+
+        #submit-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: red;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        #heart {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 640px;
+            height: 381px;
+            background-image: url('heart.gif');
+            background-size: cover;
+            transition: all 1s ease;
+        }
+
+        #heart:hover {
+            transform: scale(1.2);
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <h1>怡宝</h1>
+    <div id="message">
+        <p>我喜欢你，你愿意做我的另一半吗？</p>
+        <button id="show-letter-btn">我想给你写一封信</button>
+    </div>
+    <div id="love-letter">
+        <textarea placeholder="写下你的表白信"></textarea>
+        <button id="submit-button">发送</button>
+    </div>
+    <div id="heart"></div>
+
+    <audio id="bg-music" loop>
+        <source src="bg_music.mp3" type="audio/mpeg">
+    </audio>
+
+    <button id="play-music-btn">播放音乐</button>
+
+    <script>
+        document.getElementById('show-letter-btn').addEventListener('click', function () {
+            var loveLetterDiv = document.getElementById('love-letter');
+            loveLetterDiv.classList.add('show');
+        });
+
+        document.getElementById('submit-button').addEventListener('click', function () {
+            var loveLetterDiv = document.getElementById('love-letter');
+            var loveLetterText = loveLetterDiv.querySelector('textarea').value;
+            if (loveLetterText.trim() !== '') {
+                loveLetterDiv.innerHTML = '<p>我收到了你的表白信！</p>';
+            }
+        });
+
+        var heart = document.getElementById('heart');
+        document.addEventListener('mousemove', function (event) {
+            var x = event.clientX;
+            var y = event.clientY;
+            heart.style.top = y + 'px';
+            heart.style.left = x + 'px';
+        });
+
+        var audio = document.getElementById('bg-music');
+        var playBtn = document.getElementById('play-music-btn');
+
+        playBtn.addEventListener('click', function () {
+            audio.play();
+        });
+    </script>
+</body>
+</html>
